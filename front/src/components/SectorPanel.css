@@ -1,0 +1,135 @@
+.sector-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.sector-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-input);
+  color: var(--accent-red);
+  font-size: 0.8rem;
+  padding: 10px 14px;
+}
+
+.sector-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.sector-card {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: slideUp 0.5s ease both;
+  transition: opacity var(--ease-smooth), filter var(--ease-smooth), transform var(--ease-smooth);
+}
+
+.sector-card.sector-inactive {
+  opacity: 0.55;
+  filter: saturate(0.3);
+}
+
+.sector-card.sector-inactive:hover {
+  opacity: 0.75;
+}
+
+.sector-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.sector-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sector-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.sector-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* Status circle */
+.sector-status-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+  transition: background var(--ease-smooth), box-shadow var(--ease-smooth);
+}
+
+.sector-status-circle.green {
+  background: var(--accent-green);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+}
+
+.sector-status-circle.red {
+  background: var(--accent-red);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
+}
+
+.sector-status-circle.amber {
+  background: var(--accent-amber);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+}
+
+.sector-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sector-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sector-stat-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.sector-stat-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sector-toggle {
+  width: 100%;
+}
+
+.sector-toggle:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .sector-grid {
+    grid-template-columns: 1fr;
+  }
+}

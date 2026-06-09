@@ -1,0 +1,227 @@
+.stress-simulator {
+  display: flex;
+  flex-direction: column;
+}
+
+.sim-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sim-description {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: -8px;
+}
+
+/* ---------- Sliders ---------- */
+.sim-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slider-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.slider-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.slider-track-wrapper {
+  position: relative;
+}
+
+/* Slider color variables */
+.slider-solar {
+  --slider-start: #f59e0b;
+  --slider-end: #00d4ff;
+}
+
+.slider-battery {
+  --slider-start: #ef4444;
+  --slider-end: #10b981;
+}
+
+.slider-lunar {
+  --slider-start: #00d4ff;
+  --slider-end: #7c3aed;
+}
+
+/* ---------- Presets ---------- */
+.sim-presets {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Simulate Button ---------- */
+.sim-run-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+}
+
+.sim-run-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-cyan));
+  background-size: 200% 200%;
+  border-radius: var(--radius-input);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--ease-smooth);
+  animation: shimmer 3s linear infinite;
+}
+
+.sim-run-btn:hover::before {
+  opacity: 1;
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(10, 14, 26, 0.3);
+  border-top-color: #0a0e1a;
+  border-radius: 50%;
+  animation: rotate360 0.6s linear infinite;
+}
+
+/* ---------- Error ---------- */
+.sim-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-input);
+  color: var(--accent-red);
+  font-size: 0.8rem;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Results ---------- */
+.sim-results {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-input);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sim-results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sim-results-header h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.sim-autonomy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: var(--radius-input);
+  padding: 12px 16px;
+}
+
+.sim-autonomy-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.sim-autonomy-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.sim-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.sim-message-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Actions list */
+.sim-actions-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.sim-actions-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sim-action-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sim-action-sector {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sim-action-type {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
