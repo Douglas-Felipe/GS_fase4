@@ -111,13 +111,3 @@ graph TD
    ```
    > Acesse o painel pelo navegador em [http://localhost:5173](http://localhost:5173).
 
-### 3. Firmware ESP32 (Wokwi)
-
-O firmware está configurado para rodar no simulador online Wokwi ou em placa física utilizando o VS Code com a extensão PlatformIO.
-
-1. Abra o site [wokwi.com](https://wokwi.com) e crie um projeto novo para **ESP32**.
-2. Copie o conteúdo de `esp32/src/main.cpp` e cole no arquivo principal (`sketch.ino` no editor do Wokwi).
-3. Substitua o conteúdo do arquivo `diagram.json` do simulador pelo arquivo `esp32/diagram.json` do projeto.
-4. Adicione a biblioteca **ArduinoJson** no gerenciador de bibliotecas (Library Manager) do Wokwi.
-5. No código (`main.cpp` ou `sketch.ino`), mude o `API_HOST` para o endereço IP local do seu computador rodando o backend (ex: `192.168.1.15`).
-6. Execute a simulação. Os LEDs acenderão de acordo com o status atualizado do backend.
