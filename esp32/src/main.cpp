@@ -17,6 +17,7 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
+#include <WiFiClientSecure.h>
 
 // =============================================================================
 // CONFIGURAÇÕES DE REDE
@@ -25,10 +26,9 @@
 const char* WIFI_SSID     = "Wokwi-GUEST";
 const char* WIFI_PASSWORD = "";
 
-// Endereço da API - ALTERE PARA O IP/HOST DO SEU SERVIDOR
-// Exemplo: "192.168.1.100" ou "seu-servidor.com"
-#define API_HOST "HOST_DA_API"
-#define API_PORT 8000
+// Conexão direta com a máquina local via Wokwi Gateway 
+#define API_HOST "host.wokwi.internal:8000"
+
 #define API_TELEMETRY_PATH "/api/telemetry"
 #define API_COMMANDS_PATH  "/api/commands/pending"
 
@@ -147,6 +147,18 @@ void setup() {
 
   // Conecta ao WiFi
   conectarWiFi();
+
+  // Força uma sincronização de estado inicial com o backend imediatamente ao ligar
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.println("[SISTEMA] Executando sincronização inicial de estado...");
+    atualizarSimulacao();
+    enviarTelemetria();
+    buscarComandosPendentes();
+  }
+
+  // Inicializa os timers com o tempo atual para evitar re-execução imediata no loop
+  lastTelemetryTime = millis();
+  lastCommandPoll = millis();
 
   Serial.println("[SISTEMA] Inicialização completa!");
   Serial.println();
@@ -339,14 +351,15 @@ void enviarTelemetria() {
     return;
   }
 
-  HTTPClient http;
+  WiFiClient basicClient;
+  WiFiClientSecure secureClient;
+  WiFiClient* client = nullptr;
+  String url = "";
 
-  // Monta a URL completa da API
-  String url = "http://";
-  url += API_HOST;
-  url += ":";
-  url += API_PORT;
-  url += API_TELEMETRY_PATH;
+  client = &basicClient;
+  url = "http://" + String(API_HOST) + String(API_TELEMETRY_PATH);
+
+  HTTPClient http;
 
   Serial.print("[TELEMETRIA] Enviando para: ");
   Serial.println(url);
@@ -380,8 +393,9 @@ void enviarTelemetria() {
   Serial.println(payload);
 
   // --- Envia a requisição HTTP POST ---
-  http.begin(url);
+  http.begin(*client, url);
   http.addHeader("Content-Type", "application/json");
+  http.addHeader("ngrok-skip-browser-warning", "true"); // Ignora o aviso do ngrok para clientes não-navegadores
 
   int httpCode = http.POST(payload);
 
@@ -464,16 +478,16 @@ void buscarComandosPendentes() {
     return;
   }
 
+  WiFiClient basicClient;
+  WiFiClientSecure secureClient;
+  WiFiClient* client = nullptr;
+  String url = "";
+
+  client = &basicClient;
+  url = "http://" + String(API_HOST) + String(API_COMMANDS_PATH);
+
   HTTPClient http;
-
-  // Monta a URL completa
-  String url = "http://";
-  url += API_HOST;
-  url += ":";
-  url += API_PORT;
-  url += API_COMMANDS_PATH;
-
-  http.begin(url);
+  http.begin(*client, url);
   int httpCode = http.GET();
 
   if (httpCode > 0) {

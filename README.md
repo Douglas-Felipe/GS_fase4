@@ -79,7 +79,7 @@ graph TD
 2. Crie e ative um ambiente virtual (opcional, mas recomendado):
    ```bash
    python3 -m venv .venv
-   source .venv/bin/activate  # No Windows: .venv\Scripts\activate
+   source .venv/bin/activate
    ```
 3. Instale as dependências:
    ```bash

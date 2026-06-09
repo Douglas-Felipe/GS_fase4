@@ -23,3 +23,6 @@ api/lunargrid.db
 # OS files
 .DS_Store
 Thumbs.db
+
+# PLataformIO
+.pio/
