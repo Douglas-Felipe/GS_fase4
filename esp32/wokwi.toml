@@ -1,0 +1,16 @@
+# =============================================================================
+# LunarGrid - Configuração Wokwi para PlatformIO
+# =============================================================================
+# Este arquivo integra o simulador Wokwi com o PlatformIO.
+# O firmware compilado pelo PlatformIO é automaticamente carregado na simulação.
+#
+# Como usar:
+#   1. Compile o projeto: pio run
+#   2. No VS Code: F1 -> "Wokwi: Start Simulator"
+#   3. O Wokwi usará o firmware compilado e o diagram.json
+# =============================================================================
+
+[wokwi]
+version = 1
+firmware = ".pio/build/esp32dev/firmware.bin"
+elf = ".pio/build/esp32dev/firmware.elf"
